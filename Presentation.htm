@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<!--
+  Google HTML5 slide template
+  URL: http://code.google.com/p/html5slides/
+-->
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Presentation</title>
+
+    <meta charset="utf-8">
+
+    <!-- Hand demo -->
+    <script type="text/javascript" src="jshg/jquery-1.js"></script>
+    <script type="text/javascript" src="jshg/compatibility.js"></script>
+    <script type="text/javascript" src="jshg/jshg.js"></script>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="jshg/pure-min.css">
+    <link rel="stylesheet" href="jshg/index.css">
+  <meta name="viewport" content="width=1100,height=750"><meta name="apple-mobile-web-app-capable" content="yes"></head>
+  
+  <body class="loaded">
+
+
+      <div class="loginItems">
+      <input type="text" name="uname" placeholder="Username"><br><br>
+      <a class="button-jshg button-start pure-button" onclick="positionCheck()" target="new">Password</a>
+      </div>
+      <div id="gestureShownHere" class="gesture-div"></div>
+      <div id="learningShownHere" class="learning-div"></div>
+
+
+     <script type="text/javascript">
+        var currentGesture = null;
+        var firstTime = true;
+        /*function JSHGToggle(toggleBut) {
+          JSHG.learnSkinColor();
+          $("#startInstruction").hide();
+          JSHG.run();
+        }*/
+
+
+        function positionCheck() {
+          var i = 0;
+          var SIZE = 16;
+          var savedPW = [8,9,6,5,4];
+          var enteredPW = new Array(SIZE);
+          var prevGestureLocation = 5;
+          var currentGestureLocation = 5;
+
+          var actionMapper = function(gesture) {
+
+            if (gesture.isUp && gesture.isLeft) {
+              //console.log("Hand Position: top left");
+              currentGestureLocation = 1;
+            }
+            else if (gesture.isUp && !gesture.isLeft && !gesture.isRight) {
+              //console.log("Hand Position: top middle");
+              currentGestureLocation = 2;
+            }
+            else if (gesture.isUp && gesture.isRight) {
+              //console.log("Hand Position: top right");
+              currentGestureLocation = 3; 
+            }
+            else if (gesture.isLeft && !gesture.isUp && !gesture.isDown) {
+              //console.log("Hand Position: middle left");
+              currentGestureLocation = 4;
+            }
+            else if (gesture.isRight && !gesture.isUp && !gesture.isDown) {
+              //console.log("Hand Position: middle right");
+              currentGestureLocation = 6;
+            }
+            else if (gesture.isDown && gesture.isLeft) {
+              //console.log("Hand Position: bottom left");
+              currentGestureLocation = 7;   
+            }
+            else if (gesture.isDown && !gesture.isLeft && !gesture.isRight) {
+              //console.log("Hand Position: bottom middle");
+              currentGestureLocation = 8;
+            }
+            else if (gesture.isDown && gesture.isRight) {
+              //console.log("Hand Position: bottom right");
+              currentGestureLocation = 9;
+            }
+            else {
+              //console.log("Hand Position: middle");
+              currentGestureLocation = 5;
+            }
+
+
+
+
+            if (prevGestureLocation != currentGestureLocation)
+            {
+              if (gesture.isUp && gesture.isLeft) {
+                //console.log("Hand Position: top left");
+                enteredPW[i] = 1;
+              }
+              else if (gesture.isUp && !gesture.isLeft && !gesture.isRight) {
+                //console.log("Hand Position: top middle");
+                enteredPW[i] = 2;
+              }
+              else if (gesture.isUp && gesture.isRight) {
+                //console.log("Hand Position: top right");
+                enteredPW[i] = 3; 
+              }
+              else if (gesture.isLeft && !gesture.isUp && !gesture.isDown) {
+                //console.log("Hand Position: middle left");
+                enteredPW[i] = 4;
+              }
+              else if (gesture.isRight && !gesture.isUp && !gesture.isDown) {
+                //console.log("Hand Position: middle right");
+                enteredPW[i] = 6;
+              }
+              else if (gesture.isDown && gesture.isLeft) {
+                //console.log("Hand Position: bottom left");
+                enteredPW[i] = 7;   
+              }
+              else if (gesture.isDown && !gesture.isLeft && !gesture.isRight) {
+                //console.log("Hand Position: bottom middle");
+                enteredPW[i] = 8;
+              }
+              else if (gesture.isDown && gesture.isRight) {
+                //console.log("Hand Position: bottom right");
+                enteredPW[i] = 9;
+              }
+              else {
+                //console.log("Hand Position: middle");
+                enteredPW[i] = 5;
+              }
+
+
+              i++;
+              if (i > SIZE)
+                i = 0;
+
+              console.log("Password: " + savedPW);
+              console.log("Attempt: " + enteredPW);
+              console.log("i: " + i);
+
+              var savedPW_copy = savedPW.slice();
+              var enteredPW_copy = enteredPW.slice();
+              savedPW_copy.toString();
+              enteredPW_copy.toString();
+              savedPW_copy = ',' + savedPW_copy + ',';
+              enteredPW_copy = ',' + enteredPW_copy + ',';
+
+              if (enteredPW_copy.includes(savedPW_copy))
+                alert("Login successful!");
+            }
+
+            prevGestureLocation = currentGestureLocation;
+
+          }
+
+          JSHG.init({
+            "actionCallback": actionMapper, 
+            "learnDivId": "learningShownHere",
+            "gestureDivId": "gestureShownHere",
+            "settings": {
+              "learningCountDown": 4, 
+              "cameraWidth": 300, 
+              "cameraHeight": 225, 
+              "gestureDisplayWidth": 200, 
+              "gestureDisplayHeight": 150
+            },
+          });
+
+          JSHG.learnSkinColor();
+          JSHG.run();
+
+       }
+
+    </script> 
+  
+
+<link rel="stylesheet" type="text/css" href="jshg/css.css"><link rel="stylesheet" type="text/css" href="jshg/styles.css"><script type="text/javascript" src="jshg/prettify.js"></script></body></html>
